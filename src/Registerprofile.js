@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
 import firebase from "./firebase"
 import "firebase/firestore";
 import { TextField } from "@material-ui/core";
@@ -8,8 +7,6 @@ import { Button } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -27,21 +24,6 @@ import citelogoT from './image/citelogoT.png';
 
 
 
-import { withStyles } from '@material-ui/core/styles';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import Typography from '@material-ui/core/Typography';
-
-
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
@@ -49,10 +31,7 @@ const useStyles = makeStyles((theme) => ({
         height: "1000px",
         justifyContent: "center",
         alignItems: "center",
-        width: '100%',
-        '& > * + *': {
-            marginTop: theme.spacing(2),
-        },
+
     },
     avatar: {
         margin: theme.spacing(1),
@@ -66,44 +45,15 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const DialogTitle = withStyles(useStyles)((props) => {
-    const { children, classes, onClose, ...other } = props;
-    return (
-        <MuiDialogTitle disableTypography className={classes.root} {...other}>
-            <Typography variant="h6">{children}</Typography>
-        </MuiDialogTitle>
-    );
-});
-
-const DialogContent = withStyles((theme) => ({
-    root: {
-
-        padding: theme.spacing(2),
-    },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-    root: {
-        margin: 0,
-        padding: theme.spacing(1),
-    },
-}))(MuiDialogActions);
-
-
-export default function Register() {
 
 
 
-    const [open, setOpen] = React.useState(false);
+
+export default function Registerprofile() {
 
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+
 
 
     const [birthDate, setbirthDate] = React.useState(new Date('2014-08-18T21:11:54'));
@@ -114,42 +64,6 @@ export default function Register() {
 
 
     const classes = useStyles();
-
-
-
-    const [openwarn, setOpenwarn] = React.useState(false);
-
-    const handleClickwarn = () => {
-        setOpenwarn(true);
-    };
-
-    const handleClosewarn = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpenwarn(false);
-    };
-
-    const [openmatch, setOpenmatch] = React.useState(false);
-
-    const handleClickmatch = () => {
-        setOpenmatch(true);
-    };
-
-    const handleClosematch = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpenmatch(false);
-    };
-
-
-
-
-
-
     const [values, setvalues] = useState({
 
         firstName: "",
@@ -160,9 +74,6 @@ export default function Register() {
         studentID: "",
         PhoneNumber: "",
 
-        email: "",
-        password: "",
-        confirmpassword: "",
 
 
     });
@@ -176,30 +87,8 @@ export default function Register() {
 
 
 
-    const [agree, setAgree] = useState(false);
-
-    const checkboxHandler = () => {
-        // if agree === true, it will be set to false
-        // if agree === false, it will be set to true
-
-        setAgree(!agree);
-
-        // Don't miss the exclamation mark
-
-    }
-
-    const [agreecheckbox, setAgreecheckbox] = useState(false);
-
-
-
-    const agreecheckboxHandler = () => {
-        setOpen(false);
-        setAgreecheckbox(!agreecheckbox);
-
-    }
 
     const registerbtn = (e) => {
-       
         e.preventDefault();
 
         const firestore = firebase.database().ref("User Information");
@@ -213,10 +102,10 @@ export default function Register() {
 
 
         if (!values.email || !values.password || !values.confirmpassword || !values.firstName || !values.lastName || !values.studentID) {
-            handleClickwarn()
+            alert("Please complete the following!")
         }
         else if (values.password !== values.confirmpassword) {
-            handleClickmatch()
+            alert("Password do not match!")
         }
         else {
             // firebase
@@ -250,19 +139,6 @@ export default function Register() {
             <CssBaseline />
 
             <div className={classes.root}>
-            <Snackbar open={openwarn} autoHideDuration={6000} onClose={handleClosewarn}>
-                    <Alert onClose={handleClosewarn} severity="warning">
-                        Please complete the following!
-                    </Alert>
-                </Snackbar>
-
-
-                <Snackbar open={openmatch} autoHideDuration={6000} onClose={handleClosematch}>
-                    <Alert onClose={handleClosematch} severity="error">
-                        Password do not match!
-                    </Alert>
-                </Snackbar>
-
                 <Grid align="center">
                     <img src={citelogoT} alt="" height="160px" />
 
@@ -376,96 +252,10 @@ export default function Register() {
 
 
                     </Grid>
-                    <Grid item xs={12} >
-                        <TextField
-                            id="email"
-                            required
-                            label="email"
-                            variant="outlined"
-                            value={values.email}
-                            onChange={handleChange("email")}
-                            fullWidth
-                        />
-
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            id="password"
-                            type="password"
-                            required
-                            label="password"
-                            variant="outlined"
-                            value={values.password}
-                            onChange={handleChange("password")}
-                            fullWidth
-                        />
-
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            id="confirmpassword"
-                            type="password"
-                            required
-                            label="confirmpassword"
-                            variant="outlined"
-                            value={values.confirmpassword}
-                            onChange={handleChange("confirmpassword")}
-                            fullWidth
-                        />
-                    </Grid>
-
-
-                    <Grid item xs={12} sm={1}>
-
-
-
-
-                        <FormControlLabel
-                            control={<Checkbox color="primary" onChange={checkboxHandler} defaultChecked={false} />}
-                            // label="I agree to the " 
-
-                            disabled={!agreecheckbox} />
-                    </Grid>
-                    <Grid item xs={12} sm={11}>
-                        <Button
-                            style={{ fontSize: 16 }}
-                            onClick={handleClickOpen}>
-                            I agree to the Terms and Condition
-                        </Button>
-
-                    </Grid>
                 </Grid>
-                <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                    <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                        <h3> Terms and Condition</h3>
-                    </DialogTitle>
-                    <DialogContent dividers>
-                        <Typography gutterBottom>
-                            1. Sample Terms and Condition Sample Terms and Condition Sample
-                            Terms and Condition Sample Terms and Condition Sample Terms and Condition
-                            Sample Terms and Condition Sample Terms and Condition Sample Terms and Condition
-                        </Typography>
-                        <Typography gutterBottom>
-                            2. Sample Terms and Condition Sample Terms and Condition Sample
-                            Terms and Condition Sample Terms and Condition Sample Terms and Condition
-                            Sample Terms and Condition Sample Terms and Condition Sample Terms and Condition
-                        </Typography>
-                        <Typography gutterBottom>
-                            3. Sample Terms and Condition Sample Terms and Condition Sample
-                            Terms and Condition Sample Terms and Condition Sample Terms and Condition
-                            Sample Terms and Condition Sample Terms and Condition Sample Terms and Condition
-                        </Typography>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button autoFocus onClick={agreecheckboxHandler} color="primary">
-                            I Agree
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-
                 <Button
 
-                    disabled={!agree}
+                    // disabled={!agree}
                     onClick={registerbtn}
                     variant="contained"
                     color="secondary"
@@ -474,12 +264,6 @@ export default function Register() {
                 </Button>
 
 
-          
-                <p>Already have an Account?
-                    <Link to='/login' style={{ textDecoration: 'none', color: 'blue' }}>
-                        SIGN IN
-                    </Link>
-                </p>
 
             </div>
 

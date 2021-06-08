@@ -1,13 +1,13 @@
-* {
+/* * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /* font-family: 'PT Sans', sans-serif; */
+  
     font-family: 'Times New Roman', Times, serif;
     
   }
   
-  /* .Home,
+  .Home,
   .Login,
   .About,
   .Register {
@@ -19,16 +19,16 @@
   }
   
   .Home {
-    background-image: url('/public/CITElogo.jpg');
+    background-image: url('./image/BUSTOSlogo.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    color: #fff;
+    color: #4ff;
     font-size: 100px;
   }
   
   .Login {
-    background-image: url('/public/CITElogo.jpg');
+    background-image: url('./image/BUSTOSlogo.png');
     background-position: center;
     background-size: fill;
     background-repeat: no-repeat;
@@ -37,11 +37,12 @@
   }
   
   .Register {
-    background-image: url('/public/CITElogo.jpg');
+    background-image: url('./image/BUSTOSlogo.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     color: #fff;
     font-size: 100px;
   }
-   */
+    */
+   

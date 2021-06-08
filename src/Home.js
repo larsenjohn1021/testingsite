@@ -1,17 +1,26 @@
 import React from 'react';
-// import '../../App.css';
-// import Cards from '../Cards';
-// import HeroSection from '../HeroSection';
-// import Footer from '../Footer';
+import './App.css';
+import img1 from './image/parallax-bg2.jpg';
+import { makeStyles } from "@material-ui/core/styles";
 
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+//  textAlign:"center",
+display:"flex",
+ minHeight: "100vh",
+backgroundSize: "cover",
+backgroundRepeat: "no-repeat",
+      backgroundPosition:"fixed",
+
+  },
+
+}));
 function Home() {
-  return (
-    <>
-      {/* <HeroSection />
-      <Cards />
-      <Footer /> */}
-      <h1>Homepage,footer</h1>
-    </>
+  const classes = useStyles();
+  return (<div className= {classes.root }><img src={img1} alt="" />
+
+   <h1>Public HOMEPAGE</h1></div >
   );
 }
 
